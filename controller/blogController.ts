@@ -102,7 +102,7 @@ export const updateBlogInfo = async (req: Request, res: Response) => {
               return res.status(200).json({
                 message: "Blog Updated Successfully",
                 data: updatedBlog,
-                status: 200,
+                status: 201,
               });
         } else {
           return res.status(404).json({
@@ -118,3 +118,23 @@ export const updateBlogInfo = async (req: Request, res: Response) => {
     });
   }
 };
+
+
+export const deleteBlog = async (req: Request, res: Response)=>{
+  try {
+      const {blogID} = req.params;
+
+      const blog = await blogModel.findByIdAndDelete(
+        blogID
+      )
+      return res.status(201).json({
+        message: "Blog successfully deleted",
+        status: 201
+      })
+  } catch (error) {
+    return res.status(404).json({
+      message: "Blog does not exist",
+      status: 404
+    })
+  }
+}
