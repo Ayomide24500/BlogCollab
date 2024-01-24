@@ -150,3 +150,61 @@ export const getOneUser = async (req: Request, res: Response) => {
     });
   }
 };
+
+
+
+export const updateUserInfo = async (req: Request, res: Response) => {
+  try {
+    const { userID } = req.params;
+
+    const user = await userModel.findById(userID);
+
+    const  {fullName, address, bio, phone } = req.body;
+
+    if (user) {
+      const updatedUser = await userModel.findByIdAndUpdate(
+        userID,
+        {
+          
+          fullName,
+          address,
+          bio,
+          phone
+        },
+        {new: true},
+        )
+        
+          return res.status(201).json({
+            message: "User Updated Successfully",
+            data: updatedUser,
+            status: 201,
+          });
+  }
+  } catch (error) {
+    return res.status(404).json({
+      message: "User does not exist",
+      status: 404,
+    });
+  }
+};
+
+
+
+export const deleteUser = async (req: Request, res: Response)=>{
+  try {
+      const {userID} = req.params;
+
+      const user = await userModel.findByIdAndDelete(
+        userID
+      )
+      return res.status(201).json({
+        message: "User successfully deleted",
+        status: 201
+      })
+  } catch (error) {
+    return res.status(404).json({
+      message: "USer does not exist",
+      status: 404
+    })
+  }
+}
