@@ -29,7 +29,7 @@ const blogModel = new Schema<iBlogData>(
       type: String,
     },
     user: {
-      types: Types.ObjectId,
+      type: Types.ObjectId,
       ref: "users",
     },
   },

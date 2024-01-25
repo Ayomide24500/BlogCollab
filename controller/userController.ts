@@ -16,7 +16,7 @@ export const createUser = async (req: Request, res: Response) => {
       token,
       password: hashed,
     });
-    return res.status(404).json({
+    return res.status(201).json({
       message: "error creating user",
       data: user,
     });
@@ -74,8 +74,8 @@ export const signUser = async (req: any, res: Response) => {
             }
           );
 
-          req.session.isAuth = true;
-          req.session.userID = getUser._id;
+          // req.session.isAuth = true;
+          // req.session.userID = getUser._id;
 
           return res.status(200).json({
             message: "welcome back",
