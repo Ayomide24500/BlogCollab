@@ -7,9 +7,10 @@ const app: Application = express();
 const port: number = parseInt(process.env.PORT!);
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: "http://localhost:5173" }));
 
 mainApp(app);
+
 const server = app.listen(1290, () => {
   console.clear();
   console.log("server is up and running");
